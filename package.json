@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "simplex-noise": "^4.0.1",
+    "three": "^0.149.0",
     "three-fbx-loader": "^1.0.3"
-  }
+  },
+  "type": "module"
 }

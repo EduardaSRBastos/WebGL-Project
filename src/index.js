@@ -5,7 +5,7 @@ import {
 import { OrbitControls } from 'https://cdn.skypack.dev/three-stdlib@2.8.5/controls/OrbitControls';
 import { RGBELoader } from 'https://cdn.skypack.dev/three-stdlib@2.8.5/loaders/RGBELoader';
 import { mergeBufferGeometries } from 'https://cdn.skypack.dev/three-stdlib@2.8.5/utils/BufferGeometryUtils';
-import SimplexNoise from 'https://cdn.skypack.dev/simplex-noise';
+import { createNoise2D } from 'https://cdn.skypack.dev/simplex-noise';
 
 document.addEventListener("DOMContentLoaded", Start);
 //cena
@@ -87,8 +87,7 @@ let light3 = new PointLight( new Color("#ffb073").convertSRGBToLinear(), 30, 3 )
     chao4: await new TextureLoader().loadAsync("assets/chao4.jpg"),
   };
 
-  const simplex = new SimplexNoise(); 
-
+  const noise2D = createNoise2D();
   //definir altura dos objetos de fundo do mapa. Nas bordas é maior e vai diminuindo para o centro
   for(let i = -36; i <= 36; i++) {
     for(let j = -36; j <= 36; j++) {
@@ -96,7 +95,7 @@ let light3 = new PointLight( new Color("#ffb073").convertSRGBToLinear(), 30, 3 )
 
       if(position.length() > 32) continue;
       
-      let noise = (simplex.noise2D(i * 0.1, j * 0.1) + 1) * 0.5;
+      let noise = (noise2D(i * 0.1, j * 0.1) + 1) * 0.5;
       noise = Math.pow(noise, 1.1);
 
       if(position.length() > 22 && position.length() < 28)
